@@ -8,15 +8,6 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-/*
-bot.onText("text", (message) => {
-  bot.sendMessage(
-    message.chat.id,
-    "Hey there! Use /plant to search for your desired plant's name."
-  );
-});
-*/
-
 bot.onText(/\/plant (.+)/, (msg, match) => {
   let plant = match[1];
   let chatId = msg.chat.id;
