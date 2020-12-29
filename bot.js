@@ -3,14 +3,17 @@ const bot = new TelegramBot("1373145412:AAG7OeGNQE1-4AHore4nGRPQI9aHhfNnduw", {
   polling: true, // receiving messages
 });
 const request = require("request"); // for HTTP requests
+const trefleToken = "YrWtVX-fUjuH-ISKU7_TnjOsKMZMG56EmJrlqGllANs";
 
-bot.onText(/\/plant (.+)/, (msg, match) => {
+// syntax /search "some plant"
+bot.onText(/\/search (.+)/, (msg, match) => {
   let plant = match[1];
-  let chatId = msg.chat.id;
+  let chatId = msg.chat.id; // telegram message
   request(
-    `https://trefle.io/api/v1/species/search?token=YrWtVX-fUjuH-ISKU7_TnjOsKMZMG56EmJrlqGllANs&q=${plant}`,
+    `https://trefle.io/api/v1/species/search?token=${trefleToken}&q=${plant}`,
     (error, response, body) => {
       if (!error && response.statusCode == 200) {
+        // request succeeded
         bot
           // set up promise
           .sendMessage(chatId, `_We're looking for ${plant}..._`, {
